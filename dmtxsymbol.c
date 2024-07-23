@@ -38,7 +38,7 @@ getSizeIdxFromSymbolDimension(int rows, int cols)
 
 
 /**
- * \brief  Retrieve property based on symbol size
+ * \brief  Retrieve property based on symbol size，此处的sizeIdx是否为DM码每行的小方格数目
  * \param  attribute
  * \param  sizeIdx
  * \return Attribute value

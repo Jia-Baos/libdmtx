@@ -72,14 +72,14 @@ dmtxImageCreate(unsigned char *pxl, int width, int height, int pack)
    if(img == NULL)
       return NULL;
 
-   img->pxl = pxl;
+   img->pxl = pxl;   // 图像数据的地址
    img->width = width;
    img->height = height;
-   img->pixelPacking = pack;
-   img->bitsPerPixel = GetBitsPerPixel(pack);
-   img->bytesPerPixel = img->bitsPerPixel/8;
-   img->rowPadBytes = 0;
-   img->rowSizeBytes = img->width * img->bytesPerPixel + img->rowPadBytes;
+   img->pixelPacking = pack;  // 图像格式
+   img->bitsPerPixel = GetBitsPerPixel(pack);   // 像素比特数
+   img->bytesPerPixel = img->bitsPerPixel/8; // 像素字节数
+   img->rowPadBytes = 0;   // 图像每一行填充的字节数
+   img->rowSizeBytes = img->width * img->bytesPerPixel + img->rowPadBytes; // 图像每一行的字节数
    img->imageFlip = DmtxFlipNone;
 
    /* Leave channelStart[] and bitsPerChannel[] with zeros from calloc */
@@ -174,9 +174,9 @@ dmtxImageSetChannel(DmtxImage *img, int channelStart, int bitsPerChannel)
 /* if(channelStart + bitsPerChannel > img->bitsPerPixel)
       return DmtxFail; */
 
-   img->bitsPerChannel[img->channelCount] = bitsPerChannel;
-   img->channelStart[img->channelCount] = channelStart;
-   (img->channelCount)++;
+   img->bitsPerChannel[img->channelCount] = bitsPerChannel; // 每个通道的字节数
+   img->channelStart[img->channelCount] = channelStart; // 每个通道的起始位置，间隔为每个通道的字节数
+   (img->channelCount)++;  // 多通道图像则通道数目++
 
    return DmtxPass;
 }
@@ -263,7 +263,7 @@ dmtxImageGetByteOffset(DmtxImage *img, int x, int y)
    if(img->imageFlip & DmtxFlipY)
       return (y * img->rowSizeBytes + x * img->bytesPerPixel);
 
-   return ((img->height - y - 1) * img->rowSizeBytes + x * img->bytesPerPixel);
+   return ((img->height - y - 1) * img->rowSizeBytes + x * img->bytesPerPixel);  // 获取目标像素相对首像素的偏移量
 }
 
 /**

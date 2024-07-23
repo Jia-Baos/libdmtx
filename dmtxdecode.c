@@ -52,7 +52,7 @@ dmtxDecodeCreate(DmtxImage *img, int scale)
    dec->yMax = height - 1;
    dec->scale = scale;
 
-   dec->cache = (unsigned char *)calloc(width * height, sizeof(unsigned char));
+   dec->cache = (unsigned char *)calloc(width * height, sizeof(unsigned char));  // 此处cache大小与图像内存大小一致
    if(dec->cache == NULL) {
       free(dec);
       return NULL;

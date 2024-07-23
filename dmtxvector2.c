@@ -139,7 +139,7 @@ dmtxVector2Mag(const DmtxVector2 *v)
 }
 
 /**
- *
+ * 计算点到射线的距离
  *
  */
 extern double
@@ -154,7 +154,7 @@ dmtxDistanceFromRay2(const DmtxRay2 *r, const DmtxVector2 *q)
 }
 
 /**
- *
+ * 计算点沿着射线的距离
  *
  */
 extern double

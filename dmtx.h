@@ -244,7 +244,7 @@ typedef struct DmtxVector2_struct {
 
 /**
  * @struct DmtxRay2
- * @brief DmtxRay2
+ * @brief DmtxRay2，p和v表示构成向量的两个点
  */
 typedef struct DmtxRay2_struct {
    double          tMin;

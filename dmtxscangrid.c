@@ -50,6 +50,7 @@ InitScanGrid(DmtxDecode *dec)
 
    grid.maxExtent = extent;
 
+   // 图像在grid中央，左下角为原点，此处的偏移量为网格中点在图像坐标系中的坐标
    grid.xOffset = (grid.xMin + grid.xMax - grid.maxExtent) / 2;
    grid.yOffset = (grid.yMin + grid.yMax - grid.maxExtent) / 2;
 
@@ -155,6 +156,9 @@ GetGridCoordinates(DmtxScanGrid *grid, DmtxPixelLoc *locPtr)
 
    *locPtr = loc;
 
+   /* Jia-Baos */
+   printf("locPtr: %d, %d\n", loc.X, loc.Y);
+
    if(loc.X < grid->xMin || loc.X > grid->xMax ||
          loc.Y < grid->yMin || loc.Y > grid->yMax)
       return DmtxRangeBad;
@@ -170,9 +174,9 @@ GetGridCoordinates(DmtxScanGrid *grid, DmtxPixelLoc *locPtr)
 static void
 SetDerivedFields(DmtxScanGrid *grid)
 {
-   grid->jumpSize = grid->extent + 1;
-   grid->pixelTotal = 2 * grid->extent - 1;
-   grid->startPos = grid->extent / 2;
+   grid->jumpSize = grid->extent + 1;  // 遍历完行后去遍历列
+   grid->pixelTotal = 2 * grid->extent - 1;  // 十字上所有的像素点
+   grid->startPos = grid->extent / 2;  // 遍历起始位置
    grid->pixelCount = 0;
-   grid->xCenter = grid->yCenter = grid->startPos;
+   grid->xCenter = grid->yCenter = grid->startPos; // 十字的中心，即遍历的起始位置
 }
