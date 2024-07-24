@@ -69,7 +69,7 @@ dmtxRegionFindNext(DmtxDecode *dec, DmtxTime *timeout)
 
    /* Continue until we find a region or run out of chances */
    for(;;) {
-      locStatus = PopGridLocation(&(dec->grid), &loc);
+      locStatus = PopGridLocation(&(dec->grid), &loc);   // 通过十字结构遍历寻找可能是DM码区域的点
       if(locStatus == DmtxRangeEnd)
          break;
 
@@ -844,7 +844,7 @@ GetPointFlow(DmtxDecode *dec, int colorPlane, DmtxPixelLoc loc, int arrive)
       xAdjust = loc.X + dmtxPatternX[patternIdx];
       yAdjust = loc.Y + dmtxPatternY[patternIdx];
       err = dmtxDecodeGetPixelValue(dec, xAdjust, yAdjust, colorPlane,
-            &colorPattern[patternIdx]);
+            &colorPattern[patternIdx]);   // err = 1 表示图像区域，colorPattern中存在3*3 mat
       if(err == DmtxFail)
          return dmtxBlankEdge;
    }
@@ -856,13 +856,13 @@ GetPointFlow(DmtxDecode *dec, int colorPlane, DmtxPixelLoc loc, int arrive)
       /* Add portion from each position in the convolution matrix pattern */
       for(patternIdx = 0; patternIdx < 8; patternIdx++) {
 
-         coefficientIdx = (patternIdx - compass + 8) % 8;
+         coefficientIdx = (patternIdx - compass + 8) % 8;   // 调整参数顺序计算不同方向的梯度
          if(coefficient[coefficientIdx] == 0)
             continue;
 
          color = colorPattern[patternIdx];
 
-         switch(coefficient[coefficientIdx]) {
+         switch(coefficient[coefficientIdx]) {  //在不同的方向上计算梯度
             case 2:
                mag[compass] += color;
                /* Fall through */
@@ -886,7 +886,7 @@ GetPointFlow(DmtxDecode *dec, int colorPlane, DmtxPixelLoc loc, int arrive)
    /* Convert signed compass direction into unique flow directions (0-7) */
    flow.plane = colorPlane;
    flow.arrive = arrive;
-   flow.depart = (mag[compassMax] > 0) ? compassMax + 4 : compassMax;
+   flow.depart = (mag[compassMax] > 0) ? compassMax + 4 : compassMax;   // 此处共有八个方向
    flow.mag = abs(mag[compassMax]);
    flow.loc = loc;
 

@@ -328,9 +328,9 @@ typedef struct DmtxBestLine_struct {
    int             stepNeg;
    int             distSq;
    double          devn;
-   DmtxPixelLoc    locBeg;
-   DmtxPixelLoc    locPos;
-   DmtxPixelLoc    locNeg;
+   DmtxPixelLoc    locBeg; /* unknown */
+   DmtxPixelLoc    locPos; /* if left, left_top; if bottom, left_down*/
+   DmtxPixelLoc    locNeg; /* if left, left_down; if bottom, right_down*/
 } DmtxBestLine;
 
 /**
@@ -367,10 +367,10 @@ typedef struct DmtxRegion_struct {
    DmtxBestLine    bottomLine;    /* */
    int             topKnown;      /* known == 1; unknown == 0 */
    int             topAngle;      /* hough angle of top edge */
-   DmtxPixelLoc    topLoc;        /* known (arbitrary) location on top edge */
+   DmtxPixelLoc    topLoc;        /* known (arbitrary) location on top edge, left_top */
    int             rightKnown;    /* known == 1; unknown == 0 */
    int             rightAngle;    /* hough angle of right edge */
-   DmtxPixelLoc    rightLoc;      /* known (arbitrary) location on right edge */
+   DmtxPixelLoc    rightLoc;      /* known (arbitrary) location on right edge, right_bottom */
 
    /* Region calibration values */
    int             onColor;       /* */
