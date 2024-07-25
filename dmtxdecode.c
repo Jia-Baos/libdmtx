@@ -59,6 +59,8 @@ dmtxDecodeCreate(DmtxImage *img, int scale)
    }
 
    dec->image = img;
+   // 生成的grid尺寸大于img尺寸，以2^n取整
+   // 生成grid后，将grid中心以img为大小的区域置为有效区域
    dec->grid = InitScanGrid(dec);
 
    return dec;

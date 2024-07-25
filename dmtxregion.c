@@ -74,7 +74,7 @@ dmtxRegionFindNext(DmtxDecode *dec, DmtxTime *timeout)
          break;
 
       /* Scan location for presence of valid barcode region */
-      reg = dmtxRegionScanPixel(dec, loc.X, loc.Y);
+      reg = dmtxRegionScanPixel(dec, loc.X, loc.Y);   // 获取DM码区域的信息
       if(reg != NULL)
          return reg;
 
