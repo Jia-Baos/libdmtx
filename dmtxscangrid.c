@@ -52,9 +52,6 @@ InitScanGrid(DmtxDecode *dec)
 
 <<<<<<< HEAD
    // 图像在grid中央，左下角为原点，此处的偏移量为网格中心点在图像坐标系中的坐标
-=======
-   // img在grid中央，img的左下角为原点，此处的偏移量为grid中左下角点在img坐标系中的坐标
->>>>>>> 70fd826598a839730c8732664954ae042dff4e43
    grid.xOffset = (grid.xMin + grid.xMax - grid.maxExtent) / 2;
    grid.yOffset = (grid.yMin + grid.yMax - grid.maxExtent) / 2;
 
