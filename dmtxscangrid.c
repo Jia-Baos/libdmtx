@@ -50,8 +50,7 @@ InitScanGrid(DmtxDecode *dec)
 
    grid.maxExtent = extent;   // maxExtent大于img的宽高，等于2^n - 1
 
-<<<<<<< HEAD
-   // 图像在grid中央，左下角为原点，此处的偏移量为网格中心点在图像坐标系中的坐标
+   // img在grid中央，img的左下角为原点，此处的偏移量为grid中左下角点在img坐标系中的坐标
    grid.xOffset = (grid.xMin + grid.xMax - grid.maxExtent) / 2;
    grid.yOffset = (grid.yMin + grid.yMax - grid.maxExtent) / 2;
 
@@ -140,13 +139,8 @@ GetGridCoordinates(DmtxScanGrid *grid, DmtxPixelLoc *locPtr)
       quarter = half / 2;
 
       /* horizontal portion */
-<<<<<<< HEAD
-      if(count < half) {   // 沿十字的水平方向遍历
-         loc.X = grid->xCenter + ((count < quarter) ? (count - quarter) : (half - count));
-=======
       if(count < half) {
          loc.X = grid->xCenter + ((count < quarter) ? (count - quarter) : (half - count));   // 由左到右遍历
->>>>>>> 70fd826598a839730c8732664954ae042dff4e43
          loc.Y = grid->yCenter;
       }
       /* vertical portion */
